@@ -1,0 +1,31 @@
+{
+  "name": "nginx-handbook-2026",
+  "version": "1.0.0",
+  "description": "Nginx 实战手册 - 从单机配置到生产级网关落地",
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "keywords": [
+    "nginx",
+    "reverse-proxy",
+    "load-balancing",
+    "kubernetes",
+    "docker",
+    "http3",
+    "quic",
+    "gateway"
+  ],
+  "author": "Nginx Handbook Team",
+  "license": "MIT",
+  "devDependencies": {
+    "markdown-it-mermaid": "^0.1.4",
+    "mermaid": "^11.13.0",
+    "vitepress": "^1.6.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,278 @@
+/* 自定义样式 - Nginx 实战手册 */
+
+/* ============================================
+   1. 增加文档内容宽度
+   ============================================ */
+
+/* 主内容区域最大宽度 */
+:root {
+  --vp-layout-max-width: 1800px;
+  --vp-home-content-width: 1400px;
+  --vp-doc-content-width: 1400px;
+}
+
+/* 文档内容区域宽度调整 - 铺满中间区域，两边留 36px 间距 */
+.VPDoc.has-aside .content-container {
+  max-width: 100% !important;
+  padding-left: 36px !important;
+  padding-right: 36px !important;
+}
+
+/* 无侧边栏时的文档页面 */
+.vp-doc {
+  max-width: 1400px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 48px !important;
+  padding-right: 48px !important;
+}
+
+/* 侧边栏展开时的主内容区域 */
+@media (min-width: 960px) {
+  .vp-doc {
+    padding-left: 36px !important;
+    padding-right: 36px !important;
+  }
+}
+
+/* 代码块宽度优化 */
+.vp-doc pre,
+.vp-code-group .tabs,
+.vp-code-group div[class*='language-'] {
+  margin-left: 0;
+  margin-right: 0;
+  border-radius: 12px;
+}
+
+/* 表格宽度优化 - 允许横向滚动 */
+.vp-doc .table-wrapper {
+  overflow-x: auto;
+}
+
+.vp-doc table {
+  min-width: 100%;
+}
+
+/* Mermaid 图表容器宽度 */
+.vp-doc .mermaid,
+.vp-doc .mermaid-zoom-pan-wrapper {
+  width: 100%;
+  min-width: 100%;
+}
+
+/* 增大正文字体 */
+.vp-doc p,
+.vp-doc li,
+.vp-doc td {
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+/* 标题字体大小 */
+.vp-doc h1 { font-size: 2.5rem; }
+.vp-doc h2 { font-size: 2rem; }
+.vp-doc h3 { font-size: 1.5rem; }
+.vp-doc h4 { font-size: 1.25rem; }
+
+/* ============================================
+   2. 专注模式样式
+   ============================================ */
+
+/* 专注模式激活状态 - 隐藏所有非内容元素 */
+body.focus-mode .VPNav,
+body.focus-mode .VPSidebar,
+body.focus-mode .VPDoc .aside,
+body.focus-mode .VPDocFooter,
+body.focus-mode .doc-footer {
+  display: none !important;
+}
+
+/* 专注模式下 VPContent 居中 - 覆盖默认带有 sidebar 的 padding */
+@media (min-width: 1440px) {
+  body.focus-mode .VPContent.has-sidebar {
+    padding-right: calc((100vw - var(--vp-layout-max-width)) / 2) !important;
+    padding-left: calc((100vw - var(--vp-layout-max-width)) / 2) !important;
+  }
+}
+
+body.focus-mode .VPContent {
+  padding-top: 0 !important;
+}
+
+/* 专注模式下 VPDoc 占满全宽 */
+body.focus-mode .VPDoc {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 100% !important;
+}
+
+/* 专注模式下文档内容 - 居中显示，宽度 1100px-1700px */
+body.focus-mode .vp-doc {
+  max-width: 1700px !important;
+  min-width: 1100px !important;
+  width: 90% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+  position: relative !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+/* 专注模式切换按钮样式 */
+.focus-mode-toggle {
+  position: fixed;
+  top: 80px;
+  right: 24px;
+  z-index: 100;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.focus-mode-toggle:hover {
+  background: var(--vp-c-brand-soft);
+  border-color: var(--vp-c-brand);
+  transform: scale(1.05);
+}
+
+.focus-mode-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--vp-c-text-1);
+}
+
+/* 专注模式下的按钮位置调整 */
+body.focus-mode .focus-mode-toggle {
+  top: 24px;
+}
+
+/* 专注模式退出提示 */
+.focus-mode-exit-hint {
+  position: fixed;
+  top: 24px;
+  right: 80px;
+  padding: 8px 16px;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--vp-c-text-2);
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+body.focus-mode .focus-mode-exit-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   3. 首页优化样式
+   ============================================ */
+
+/* 首页 Hero 区域优化 */
+.VPHero {
+  padding: 48px 24px;
+}
+
+.VPHero .container {
+  max-width: var(--vp-home-content-width) !important;
+}
+
+.VPHero .main {
+  text-align: center;
+}
+
+.VPHero .name {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.VPHero .text {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  line-height: 1.5;
+  color: var(--vp-c-text-2);
+  margin-top: 16px;
+}
+
+.VPHero .tagline {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--vp-c-text-3);
+  margin-top: 12px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 首页特性卡片 */
+.VPFeatures {
+  padding: 64px 24px;
+}
+
+.VPFeatures .container {
+  max-width: var(--vp-home-content-width) !important;
+}
+
+/* 首页内容区域 */
+.home .content-container {
+  max-width: var(--vp-home-content-width) !important;
+}
+
+/* ============================================
+   4. 响应式优化
+   ============================================ */
+
+@media (max-width: 768px) {
+  .vp-doc {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  .focus-mode-toggle {
+    top: 70px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ============================================
+   5. 深色模式适配
+   ============================================ */
+
+.dark .focus-mode-toggle {
+  background: var(--vp-c-bg-soft);
+}
+
+.dark .focus-mode-toggle:hover {
+  background: var(--vp-c-brand-soft);
+}
+
+/* ============================================
+   6. 动画过渡效果
+   ============================================ */
+
+.VPDoc,
+.VPNav,
+.VPSidebar,
+.aside {
+  transition: opacity 0.3s ease;
+}

@@ -1,0 +1,4 @@
+node_modules
+.playwright-mcp
+docs/.vitepress/dist
+docs/.vitepress/cache

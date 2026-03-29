@@ -129,7 +129,7 @@ export default defineConfig({
       lazyLoading: true,
     },
   },
-  
+
   vite: {
     server: {
       port: 3000,

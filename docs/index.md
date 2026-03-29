@@ -80,30 +80,36 @@ features:
 ## 📚 学习路径
 
 ```mermaid
-journey
-    title Nginx 学习路线
-    section 基础篇 (1-4 章)
-      架构原理：(5)
-      安装配置：(5)
-      核心概念：(5)
-      静态资源：(5)
-    section 代理篇 (5-9 章)
-      反向代理：(5)
-      负载均衡：(5)
-      高级代理：(5)
-      WebSocket：(5)
-      gRPC/HTTP2: (5)
-    section 安全篇 (10-14 章)
-      HTTPS/TLS: (5)
-      HTTP/3 QUIC: (5)
-      限流熔断：(5)
-      访问控制：(5)
-      性能调优：(5)
-    section 云原生篇 (15-18 章)
-      Docker: (5)
-      K8s Ingress: (5)
-      可观测性：(5)
-      GitOps: (5)
+flowchart LR
+    subgraph S1["📘 基础篇 (1-4 章)"]
+        A1["1. 概述与架构"]
+        A2["2. 安装与初始化"]
+        A3["3. 核心概念"]
+        A4["4. 静态资源"]
+    end
+
+    subgraph S2["🔄 代理篇 (5-9 章)"]
+        B1["5. 反向代理"]
+        B2["6. 负载均衡"]
+        B3["7. 高级代理"]
+        B4["8. WebSocket"]
+        B5["9. gRPC/HTTP2"]
+    end
+
+    subgraph S3["🔐 安全篇 (10-14 章)"]
+        C1["10. HTTPS/TLS"]
+        C2["11. HTTP/3 QUIC"]
+        C3["12. 限流与 DDoS"]
+        C4["13. 访问控制"]
+        C5["14. 性能调优"]
+    end
+
+    subgraph S4["☁️ 云原生篇 (15-18 章)"]
+        D1["15. Docker"]
+        D2["16. K8s Ingress"]
+        D3["17. 可观测性"]
+        D4["18. GitOps"]
+    end
 ```
 
 ## 🎯 贯穿案例：电商系统架构

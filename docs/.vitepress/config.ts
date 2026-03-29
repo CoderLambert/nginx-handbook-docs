@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'Nginx 实战手册',
   description: '从单机配置到生产级网关落地（2026 版）',
+  base: '/nginx-handbook-docs/',
   cleanUrls: true,
   ignoreDeadLinks: true,
   lastUpdated: true,

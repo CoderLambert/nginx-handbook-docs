@@ -128,12 +128,19 @@ sequenceDiagram
     Nginx-->>Client: 完成
     
     Note over Client,Server: 模式 4: Bidirectional Streaming（双向流）
-    
-    Client->>Nginx: 建立双向流
+
+    Client->>+Nginx: 建立双向流
+    Nginx->>+Server: 转发流
+
     loop 持续通信
-        Client->>Nginx->>Server: 客户端消息
-        Server->>Nginx->>Client: 服务端消息
+        Client->>Nginx: 客户端消息
+        Nginx->>Server: 转发
+        Server->>Nginx: 服务端消息
+        Nginx->>Client: 转发
     end
+
+    Client->>-Nginx: 关闭流
+    Nginx->>-Server: 关闭流
 ```
 
 ### 9.3 Protocol Buffers 简介

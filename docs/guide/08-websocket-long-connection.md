@@ -89,29 +89,33 @@ quadrantChart
 
 ```mermaid
 sequenceDiagram
+    autonumber
     participant Client as 浏览器
     participant Nginx as Nginx 代理
     participant Backend as WebSocket 后端
-    
+
     Note over Client,Backend: 阶段 1: HTTP 握手升级
-    
-    Client->>Nginx: 1. HTTP 请求<br/>GET /chat HTTP/1.1<br/>Upgrade: websocket<br/>Connection: Upgrade<br/>Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
-    
+
+    Client->>+Nginx: 1. HTTP 请求 (Upgrade: websocket)
+    Note over Client,Nginx: Connection: Upgrade<br/>Sec-WebSocket-Key: ...
+
     Note over Nginx: 检测 Upgrade 头部<br/>转发到 WebSocket 上游
-    
-    Nginx->>Backend: 2. 转发握手请求<br/>Upgrade: websocket<br/>Connection: upgrade<br/>Sec-WebSocket-Key: ...
-    
+
+    Nginx->>+Backend: 2. 转发握手请求
     Note over Backend: 验证 Key<br/>生成 Accept
-    
-    Backend-->>Nginx: 3. 响应握手<br/>HTTP/1.1 101 Switching Protocols<br/>Upgrade: websocket<br/>Connection: Upgrade<br/>Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=
-    
-    Nginx-->>Client: 4. 返回握手响应
-    
+
+    Backend-->>-Nginx: 3. 101 Switching Protocols
+    Note over Backend,Nginx: Upgrade: websocket<br/>Sec-WebSocket-Accept: ...
+
+    Nginx-->>-Client: 4. 返回握手响应
+
     Note over Client,Backend: 阶段 2: WebSocket 全双工通信
-    
-    Client->>Nginx->>Backend: 5. 发送消息 (Frame)
-    Backend->>Nginx->>Client: 6. 接收消息 (Frame)
-    
+
+    Client->>Nginx: 5. 发送消息 (Frame)
+    Nginx->>Backend: 转发消息
+    Backend->>Nginx: 6. 接收消息 (Frame)
+    Nginx->>Client: 转发消息
+
     Note over Client,Backend: TCP 连接保持<br/>直到任意一方关闭
 ```
 
